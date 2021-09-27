@@ -10,6 +10,8 @@
             this.Videos = new HashSet<Video>();
         }
 
+        public string AccountPictureUrl { get; set; }
+
         public ICollection<Video> Videos { get; set; }
     }
 }

@@ -22,8 +22,6 @@
         [MaxLength(MaxVideoDescriptionLength)]
         public string Description { get; set; }
 
-        public int ViewsCount { get; set; }
-
         public DateTime CreatedOn { get; set; }
 
         public string ApplicationUserId { get; set; }

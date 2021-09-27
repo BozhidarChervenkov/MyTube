@@ -26,8 +26,15 @@ using MyTube.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "D:\Web Projects\MyTube\MyTube\MyTube\MyTube\Views\_ViewImports.cshtml"
+using MyTube.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"99464617055fdb505bb0bb7fd91f9b14f7b0d030", @"/Views/Home/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"00dca1070e54fc38769a31464b8a670fc0403b7a", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"90d62353b6a8533315b809f5c795b777ddd39306", @"/Views/_ViewImports.cshtml")]
     public class Views_Home_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

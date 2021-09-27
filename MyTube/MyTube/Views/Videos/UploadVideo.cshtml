@@ -1,0 +1,38 @@
+﻿@model UploadVideoFormModel
+
+@{
+    this.ViewData["Title"] = "Upload video";
+}
+
+<div class="container">
+    <h3 class="display-4 text-center">@this.ViewData["Title"]:</h3>
+
+    <hr>
+
+    <form asp-controller="Videos" asp-action="UploadVideo" method="post" class="col-md-8 offset-2">
+
+        <div class="form-group">
+            <label asp-for="Title" class="control-label"></label>
+            <input type="text" asp-for="Title" class="form-control" placeholder="Title" />
+            <span asp-validation-for="Title" class="text-danger" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="VideoUrl" class="control-label"></label>
+            <input type="text" asp-for="VideoUrl" class="form-control" placeholder="Video Url" />
+            <span asp-validation-for="VideoUrl" class="text-danger" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control" placeholder="Description..." rows="5"></textarea>
+            <span asp-validation-for="Description" class="text-danger" />
+        </div>
+
+        <div class="text-center">
+            <button type="submit" formmethod="post" class="btn-success btn-lg">Upload</button>
+        </div>
+    </form>
+
+    <hr>
+</div>
