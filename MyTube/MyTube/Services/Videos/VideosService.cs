@@ -1,6 +1,8 @@
 ﻿namespace MyTube.Services.Videos
 {
     using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Identity;
 
     using MyTube.Data;
     using MyTube.Models;
@@ -10,10 +12,12 @@
     public class VideosService : IVideosService
     {
         private readonly ApplicationDbContext context;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public VideosService(ApplicationDbContext context)
+        public VideosService(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             this.context = context;
+            this.userManager = userManager;
         }
 
         public void UploadVideo(UploadVideoFormModel input, string currentUserId)
@@ -74,6 +78,53 @@
             };
 
             return viewModel;
+        }
+
+        public bool DoesVideoExist(int videoId)
+        {
+            var doesItExist = this.context.Videos.Any(v => v.Id == videoId);
+
+            return doesItExist;
+        }
+
+        public async Task<VideoByIdViewModel> VideoByIdLogic(int videoId)
+        {
+            var video = this.context.Videos.FirstOrDefault(v => v.Id == videoId);
+
+            //Increase the views count by one and save changes to Db:
+            video.ViewsCount++;
+            await this.context.SaveChangesAsync();
+
+            //Collect the view model information:
+            var embeddedCode = EmbeddedCode(video.VideoUrl);
+            var user = await this.userManager.FindByIdAsync(video.ApplicationUserId);
+
+            var viewModel = new VideoByIdViewModel
+            {
+                Id = video.Id,
+                Title = video.Title,
+                EmbeddedCode = embeddedCode,
+                VideoImageUrl = video.VideoImageUrl,
+                Description = video.Description,
+                ViewsCount = video.ViewsCount,
+                LikesCount = video.LikesCount,
+                CreatedOn = video.CreatedOn,
+                ApplicationUserId = user.Id,
+                UserName = user.UserName,
+                AccountPictureUrl = user.AccountPictureUrl
+            };
+
+            return viewModel;
+        }
+
+        private string EmbeddedCode(string videoUrl)
+        {
+            var path = videoUrl;
+
+            int position = path.IndexOf("=") + 1;
+            var embeddedCode = path.Substring(position, 11);
+
+            return embeddedCode;
         }
     }
 }
