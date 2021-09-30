@@ -37,41 +37,40 @@
         {
             var videos = this.context.Videos
                 .Select(v => new VideoInListViewModel
-            {
-                Id = v.Id,
-                Title = v.Title,
-                VideoUrl = v.VideoUrl,
-                VideoImageUrl = v.VideoImageUrl,
-                ViewsCount = v.ViewsCount,
-                LikesCount = v.LikesCount,
-                CreatedOn = v.CreatedOn,
-                AccountName = v.ApplicationUser.UserName,
-                AccountPictureUrl = v.ApplicationUser.AccountPictureUrl
-            })
-            .ToList();
+                {
+                    Id = v.Id,
+                    Title = v.Title,
+                    VideoUrl = v.VideoUrl,
+                    VideoImageUrl = v.VideoImageUrl,
+                    ViewsCount = v.ViewsCount,
+                    LikesCount = v.LikesCount,
+                    CreatedOn = v.CreatedOn,
+                    AccountName = v.ApplicationUser.UserName,
+                    AccountPictureUrl = v.ApplicationUser.AccountPictureUrl
+                });
 
             switch (sortTerm)
             {
                 case null:
-                    videos.OrderBy(v => v.Id);
+                    videos = videos.OrderBy(v => v.Id);
                     break;
                 case "Latest":
-                    videos.OrderByDescending(v => v.CreatedOn);
+                    videos = videos.OrderByDescending(v => v.CreatedOn);
                     break;
                 case "Oldest":
-                    videos.OrderBy(v => v.CreatedOn);
+                    videos = videos.OrderBy(v => v.CreatedOn);
                     break;
                 case "Most Viewed":
-                    videos.OrderByDescending(v => v.ViewsCount);
+                    videos = videos.OrderByDescending(v => v.ViewsCount);
                     break;
                 case "Most Liked":
-                    videos.OrderBy(v => v.LikesCount);
+                    videos = videos.OrderBy(v => v.LikesCount);
                     break;
             }
 
             var viewModel = new HomePageViewModel
             {
-                Videos = videos
+                Videos = videos.ToList()
             };
 
             return viewModel;
