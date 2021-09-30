@@ -1,8 +1,43 @@
-﻿@{
+﻿@model HomePageViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@*Todo: Add video sorting options*@
+
+<div class="row justify-content-center">
+    <a asp-controller="Home" asp-action="Index" asp-route-sortTerm = "All" type="button" class="btn btn-success mr-3" style="width: 80px; height: 40px;">All</a>
+    <a asp-controller="Home" asp-action="Index" asp-route-sortTerm = "Latest" type="button" class="btn btn-primary mr-3" style="width: 80px; height: 40px;">Latest</a>
+    <a asp-controller="Home" asp-action="Index" asp-route-sortTerm = "Oldest" type="button" class="btn btn-secondary mr-3" style="width: 80px; height: 40px;">Oldest</a>
+    <a asp-controller="Home" asp-action="Index" asp-route-sortTerm="Most Viewed" type="button" class="btn btn-info mr-3" style="width: 120px; height: 40px;">Most Viewed</a>
+    <a asp-controller="Home" asp-action="Index" asp-route-sortTerm="Most Liked" type="button" class="btn btn-danger mr-3" style="width: 120px; height: 40px;">Most Liked</a>
 </div>
+
+<hr>
+
+<div class="row">
+    @foreach (var video in Model.Videos)
+    {
+        <div class="card mr-1 mb-1" style="width: 17rem;">
+            <div class="text-center">
+                <a asp-controller="Videos" asp-action="VideoById" asp-all-route-id="@video.Id">
+                    <img src="@video.VideoImageUrl" class="card-img-top">
+                </a>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-center">@video.Title</h5>
+                <div class="row justify-content-center">
+                    <img src="@video.AccountPictureUrl" style="width: 45px; height: 32px;" class="rounded-circle mr-2" />
+                    <p class="card-text text-center mr-5">@video.AccountName</p>
+                    <p>@video.ViewsCount views</p>
+                </div>
+                <div class="row justify-content-center">
+                    <p class="card-text text-center">@video.CreatedOn</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<hr>

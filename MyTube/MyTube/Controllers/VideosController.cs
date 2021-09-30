@@ -2,9 +2,10 @@
 {
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+
     using MyTube.Models;
-    using MyTube.Services;
-    using MyTube.ViewModels;
+    using MyTube.Services.Videos;
+    using MyTube.ViewModels.Video;
 
     public class VideosController : Controller
     {

@@ -1,4 +1,4 @@
-﻿namespace MyTube.ViewModels
+﻿namespace MyTube.ViewModels.Video
 {    
     using System;
     using System.ComponentModel;
@@ -18,6 +18,10 @@
         [Required]
         [DisplayName("Video Url")]
         public string VideoUrl { get; set; }
+
+        [Required]
+        [DisplayName("Video image Url")]
+        public string VideoImageUrl { get; set; }
 
         [MinLength(MinVideoDescriptionLength)]
         [MaxLength(MaxVideoDescriptionLength)]

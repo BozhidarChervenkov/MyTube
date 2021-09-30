@@ -9,7 +9,7 @@ namespace MyTube
 
     using MyTube.Data;
     using MyTube.Models;
-    using MyTube.Services;
+    using MyTube.Services.Videos;
 
     public class Startup
     {

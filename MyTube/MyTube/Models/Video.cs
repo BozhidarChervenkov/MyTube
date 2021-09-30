@@ -17,10 +17,17 @@
 
         [Required]
         public string VideoUrl { get; set; }
+        
+        [Required]
+        public string VideoImageUrl { get; set; }
 
         [MinLength(MinVideoDescriptionLength)]
         [MaxLength(MaxVideoDescriptionLength)]
         public string Description { get; set; }
+
+        public int ViewsCount { get; set; }
+
+        public int LikesCount { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
