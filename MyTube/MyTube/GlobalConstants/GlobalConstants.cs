@@ -2,6 +2,8 @@
 {
     public static class GlobalConstants
     {
+        public const int PlaylistNumberOfSongs = 6;
+
         public const int UserNameMinLength = 3;
         public const int UserNameMaxLength = 20;
 
@@ -10,5 +12,8 @@
 
         public const int MinVideoDescriptionLength = 20;
         public const int MaxVideoDescriptionLength = 150;
+
+        public const int CommentContentMinLength = 10;
+        public const int CommentContentMaxLength = 70;
     }
 }

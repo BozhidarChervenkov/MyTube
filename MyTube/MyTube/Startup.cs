@@ -9,6 +9,7 @@ namespace MyTube
 
     using MyTube.Data;
     using MyTube.Models;
+    using MyTube.Services.Comments;
     using MyTube.Services.Videos;
 
     public class Startup
@@ -42,6 +43,7 @@ namespace MyTube
 
             // Register services:
             services.AddTransient<IVideosService, VideosService>();
+            services.AddTransient<ICommentsService, CommentsService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

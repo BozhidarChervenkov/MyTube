@@ -5,22 +5,51 @@
     string path = "https://www.youtube.com/embed/" + Model.EmbeddedCode;
 }
 
-<div class="col-8">
-    <iframe width="700" height="400" src="@path" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="row">
+    <div class="col-8">
+        <iframe width="730" height="430" src="@path" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-    <h3>@Model.Title</h3>
-    <div class="row">
-        <h5 class="ml-3">@Model.ViewsCount views</h5> <h5 class="offset-7">@Model.CreatedOn</h5>
+        <h3>@Model.Title</h3>
+        <div class="row">
+            <h5 class="ml-3">@Model.ViewsCount views</h5> <h5 class="offset-7">@Model.CreatedOn</h5>
+        </div>
+        <hr>
+        <div class="row ml-0">
+            <img src="@Model.AccountPictureUrl" style="width: 45px; height: 32px;" class="rounded-circle mr-2" /> @Model.UserName
+            <p class="offset-7">
+                Like:<i class="far fa-thumbs-up ml-1"> 0</i>
+                Dislike:<i class="far fa-thumbs-down ml-1"> 0</i>
+            </p>
+        </div>
+        <p class="mt-2">@Model.Description</p>
+        <hr>
+        <h3 class="offset-5">Comments:</h3>
+
+        <form asp-controller="Comments" asp-action="Create" method="post">
+            <div class="form-group">
+                <input asp-for="CreateCommentInputModel.VideoId" hidden value="@Model.Id" />
+                <input asp-for="CreateCommentInputModel.ApplicationUserId" hidden value="@Model.CurrentUserId" />
+                <label asp-for="CreateCommentInputModel.Content"></label>
+                <textarea asp-for="CreateCommentInputModel.Content" class="form-control"></textarea>
+                <span asp-validation-for="CreateCommentInputModel.Content" class="text-danger" />
+                <div class="text-center">
+                    <button type="submit" formmethod="post" class="btn btn-success mt-2">Comment</button>
+                </div>
+            </div>
+        </form>
     </div>
-    <hr>
-    <div class="row ml-0">
-        <img src="@Model.AccountPictureUrl" style="width: 45px; height: 32px;" class="rounded-circle mr-2" /> @Model.UserName
-        <p class="offset-7">
-            Like:<i class="far fa-thumbs-up ml-1"> 0</i>
-            Dislike:<i class="far fa-thumbs-down ml-1"> 0</i>
-        </p>
+    <div class="col-4">
+        @foreach (var videoInPlaylist in Model.PlayListVideos)
+        {
+            <div class="card offset-2 mt-1" style="width: 18rem;">
+                <a asp-controller="Videos" asp-action="VideoById" asp-route-id="@videoInPlaylist.Id">
+                    <img src="@videoInPlaylist.VideoImageUrl" style="width:287px; height:175px;" class="card-img-top" alt="...">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">@videoInPlaylist.Title</h5>
+                    <p class="card-text">@videoInPlaylist.ViewsCount views</p>
+                </div>
+            </div>
+        }
     </div>
-    <p class="mt-2">@Model.Description</p>
-    <hr>
-    <h3 class="offset-5">Comments:</h3>
 </div>

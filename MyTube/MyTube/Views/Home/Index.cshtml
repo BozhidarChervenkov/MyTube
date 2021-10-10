@@ -4,8 +4,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-@*Todo: Add video sorting options*@
-
 <div class="row justify-content-center">
     <a asp-controller="Home" asp-action="Index" asp-route-sortTerm = "All" type="button" class="btn btn-success mr-3" style="width: 80px; height: 40px;">All</a>
     <a asp-controller="Home" asp-action="Index" asp-route-sortTerm = "Latest" type="button" class="btn btn-primary mr-3" style="width: 80px; height: 40px;">Latest</a>
@@ -22,7 +20,7 @@
         <div class="card mr-1 mb-1" style="width: 17rem;">
             <div class="text-center">
                 <a asp-controller="Videos" asp-action="VideoById" asp-route-id="@video.Id">
-                    <img src="@video.VideoImageUrl" class="card-img-top">
+                    <img src="@video.VideoImageUrl" style="width:270px; height:160px;" class="card-img-top">
                 </a>
             </div>
             <div class="card-body">

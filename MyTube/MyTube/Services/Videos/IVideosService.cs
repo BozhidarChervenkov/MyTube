@@ -13,6 +13,6 @@
 
         bool DoesVideoExist(int videoId);
 
-        Task<VideoByIdViewModel> VideoByIdLogic(int videoId);
+        Task<VideoByIdViewModel> VideoByIdLogic(int videoId, string currentUserId);
     }
 }

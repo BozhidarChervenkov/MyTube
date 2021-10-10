@@ -1,11 +1,16 @@
 ﻿namespace MyTube.ViewModels.Video
 {
+    using MyTube.ViewModels.Comment;
     using System;
-
-    using MyTube.Models;
+    using System.Collections.Generic;
 
     public class VideoByIdViewModel
     {
+        public VideoByIdViewModel()
+        {
+            this.PlayListVideos = new HashSet<VideoInPlayListViewModel>();
+        }
+
         public int Id { get; set; }
 
         public string Title { get; set; }
@@ -27,5 +32,11 @@
         public string UserName { get; set; }
 
         public string AccountPictureUrl { get; set; }
+
+        public string CurrentUserId { get; set; }
+
+        public CreateCommentInputModel CreateCommentInputModel{get; set;}
+
+        public ICollection<VideoInPlayListViewModel> PlayListVideos { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace MyTube.Services.Videos
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Identity;
@@ -8,6 +9,8 @@
     using MyTube.Models;
     using MyTube.ViewModels.Home;
     using MyTube.ViewModels.Video;
+
+    using static GlobalConstants.GlobalConstants;
 
     public class VideosService : IVideosService
     {
@@ -87,18 +90,35 @@
             return doesItExist;
         }
 
-        public async Task<VideoByIdViewModel> VideoByIdLogic(int videoId)
+        public async Task<VideoByIdViewModel> VideoByIdLogic(int videoId, string currentUserId)
         {
             var video = this.context.Videos.FirstOrDefault(v => v.Id == videoId);
 
-            //Increase the views count by one and save changes to Db:
+            // Increase the views count by one and save changes to Db:
             video.ViewsCount++;
             await this.context.SaveChangesAsync();
 
-            //Collect the view model information:
+            // Extract the embedded code so that it can be used in the player
             var embeddedCode = EmbeddedCode(video.VideoUrl);
+
+            // Find the video publisher and use his info in the view
             var user = await this.userManager.FindByIdAsync(video.ApplicationUserId);
 
+            // Get random n count songs for the player
+            var playlistSongs = this.context.Videos
+                .Where(v=>v.Id != videoId)
+                .OrderBy(r => Guid.NewGuid())
+                .Select(v => new VideoInPlayListViewModel
+                {
+                    Id = v.Id,
+                    Title = v.Title,
+                    VideoImageUrl = v.VideoImageUrl,
+                    ViewsCount = v.ViewsCount
+                })
+                .Take(PlaylistNumberOfSongs)
+                .ToList();
+
+            // Fill the final view model information
             var viewModel = new VideoByIdViewModel
             {
                 Id = video.Id,
@@ -111,7 +131,9 @@
                 CreatedOn = video.CreatedOn,
                 ApplicationUserId = user.Id,
                 UserName = user.UserName,
-                AccountPictureUrl = user.AccountPictureUrl
+                AccountPictureUrl = user.AccountPictureUrl,
+                CurrentUserId = currentUserId,
+                PlayListVideos = playlistSongs
             };
 
             return viewModel;

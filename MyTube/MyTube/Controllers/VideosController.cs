@@ -46,13 +46,14 @@
         public async Task<IActionResult> VideoById(int id)
         {
             bool doesVideoExist = this.videosService.DoesVideoExist(id);
+            var currentUserId = this.userManager.GetUserId(this.User);
 
             if (doesVideoExist == false)
             {
                 return this.BadRequest();
             }
-
-            var viewModel = await this.videosService.VideoByIdLogic(id);
+            
+            var viewModel = await this.videosService.VideoByIdLogic(id, currentUserId);
 
             return this.View(viewModel);
         }
