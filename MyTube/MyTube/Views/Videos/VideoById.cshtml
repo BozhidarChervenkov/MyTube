@@ -6,6 +6,8 @@
 }
 
 <div class="row">
+
+    @*Video palyer section*@
     <div class="col-8">
         <iframe width="730" height="430" src="@path" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -25,6 +27,7 @@
         <hr>
         <h3 class="offset-5">Comments:</h3>
 
+        @*Create comment section*@
         <form asp-controller="Comments" asp-action="Create" method="post">
             <div class="form-group">
                 <input asp-for="CreateCommentInputModel.VideoId" hidden value="@Model.Id" />
@@ -37,7 +40,31 @@
                 </div>
             </div>
         </form>
+
+        @*Display comments section*@
+        @foreach (var comment in Model.Comments)
+        {
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <img src="@comment.AccountPictureUrl" style="width: 45px; height: 32px;" class="rounded-circle mr-2" />
+                        @comment.UserName
+                        <div class="offset-5">
+                            @comment.CreatedOn
+                            <a class="btn btn-warning ml-4">Reply</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">@comment.Content</p>
+                    @*Todo: Add replies here:*@
+                </div>
+            </div>
+        }
+
     </div>
+
+    @*Video playlist section*@
     <div class="col-4">
         @foreach (var videoInPlaylist in Model.PlayListVideos)
         {

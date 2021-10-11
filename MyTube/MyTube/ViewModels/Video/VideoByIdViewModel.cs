@@ -8,6 +8,7 @@
     {
         public VideoByIdViewModel()
         {
+            this.Comments = new HashSet<CommentViewModel>();
             this.PlayListVideos = new HashSet<VideoInPlayListViewModel>();
         }
 
@@ -36,6 +37,8 @@
         public string CurrentUserId { get; set; }
 
         public CreateCommentInputModel CreateCommentInputModel{get; set;}
+
+        public ICollection<CommentViewModel> Comments { get; set; }
 
         public ICollection<VideoInPlayListViewModel> PlayListVideos { get; set; }
     }

@@ -7,6 +7,7 @@
 
     using MyTube.Data;
     using MyTube.Models;
+    using MyTube.ViewModels.Comment;
     using MyTube.ViewModels.Home;
     using MyTube.ViewModels.Video;
 
@@ -118,6 +119,20 @@
                 .Take(PlaylistNumberOfSongs)
                 .ToList();
 
+            // Get the video comments and filter only the needed info into view model
+            var videoComments = this.context.Comments
+                .Where(c => c.VideoId == videoId)
+                .Select(c=> new CommentViewModel 
+                {
+                    Id = c.Id,
+                    Content = c.Content,
+                    AccountPictureUrl = c.ApplicationUser.AccountPictureUrl,
+                    UserName = c.ApplicationUser.UserName,
+                    CreatedOn = c.CreatedOn,
+                    Replies = c.Replies
+                })
+                .ToList();
+
             // Fill the final view model information
             var viewModel = new VideoByIdViewModel
             {
@@ -133,6 +148,7 @@
                 UserName = user.UserName,
                 AccountPictureUrl = user.AccountPictureUrl,
                 CurrentUserId = currentUserId,
+                Comments = videoComments,
                 PlayListVideos = playlistSongs
             };
 
