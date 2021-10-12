@@ -25,10 +25,9 @@
         </div>
         <p class="mt-2">@Model.Description</p>
         <hr>
-        <h3 class="offset-5">Comments:</h3>
 
         @*Create comment section*@
-        <form asp-controller="Comments" asp-action="Create" method="post">
+        <form asp-controller="Comments" asp-action="SaveComment" method="post">
             <div class="form-group">
                 <input asp-for="CreateCommentInputModel.VideoId" hidden value="@Model.Id" />
                 <input asp-for="CreateCommentInputModel.ApplicationUserId" hidden value="@Model.CurrentUserId" />
@@ -41,6 +40,12 @@
             </div>
         </form>
 
+        <h3 class="text-center">Comments:</h3>
+        @if (Model.Comments.Count() == 0)
+        {
+            <h4 class="text-warning text-center mt-5">No Comments :)</h4>
+        }
+
         @*Display comments section*@
         @foreach (var comment in Model.Comments)
         {
@@ -51,13 +56,34 @@
                         @comment.UserName
                         <div class="offset-5">
                             @comment.CreatedOn
-                            <a class="btn btn-warning ml-4">Reply</a>
+                            <a class="btn btn-warning ml-4" id="reply-button">Reply</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">@comment.Content</p>
-                    @*Todo: Add replies here:*@
+                    <p class="card-text"><i class="fas fa-comment mr-2"></i>@comment.Content</p>
+
+                    @*Replies popup form*@
+                    <form asp-controller="Comments" asp-action="SaveReply" method="post" class="d-none" id="reply-form">
+                        <div class="form-group">
+                            <input asp-for="CreateReplyInputModel.VideoId" hidden value="@Model.Id" />
+                            <input asp-for="CreateReplyInputModel.CommentId" hidden value="@comment.Id" />
+                            <label asp-for="CreateReplyInputModel.Content"></label>
+                            <textarea asp-for="CreateReplyInputModel.Content" class="form-control"></textarea>
+                            <span asp-validation-for="CreateReplyInputModel.Content" class="text-danger" />
+                            <div class="text-center">
+                                <button type="submit" formmethod="post" class="btn btn-success mt-2" id="save-replyButton">Save reply</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    @*Display replies section*@
+                    @foreach (var reply in comment.Replies)
+                    {
+                        <hr />
+                        <p class="offset-6"><i class="fas fa-reply mr-2"></i>Reply</p>
+                        <p class="offset-6">@reply.Content</p>
+                    }
                 </div>
             </div>
         }
@@ -70,7 +96,7 @@
         {
             <div class="card offset-2 mt-1" style="width: 18rem;">
                 <a asp-controller="Videos" asp-action="VideoById" asp-route-id="@videoInPlaylist.Id">
-                    <img src="@videoInPlaylist.VideoImageUrl" style="width:287px; height:175px;" class="card-img-top" alt="...">
+                    <img src="@videoInPlaylist.VideoImageUrl" style="width:287px; height:175px;" class="card-img-top">
                 </a>
                 <div class="card-body">
                     <h5 class="card-title">@videoInPlaylist.Title</h5>
@@ -80,3 +106,14 @@
         }
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        $('#reply-button').on('click', ev => {
+            $('#reply-form').removeClass('d-none');
+        })
+        $('#save-replyButton').on('click', ev => {
+            $('#reply-form').addClass('d-none')
+        })
+    </script>
+}

@@ -1,8 +1,9 @@
 ﻿namespace MyTube.ViewModels.Video
 {
-    using MyTube.ViewModels.Comment;
     using System;
     using System.Collections.Generic;
+
+    using MyTube.ViewModels.Comment;
 
     public class VideoByIdViewModel
     {
@@ -37,6 +38,8 @@
         public string CurrentUserId { get; set; }
 
         public CreateCommentInputModel CreateCommentInputModel{get; set;}
+
+        public CreateReplyInputModel CreateReplyInputModel { get; set; }
 
         public ICollection<CommentViewModel> Comments { get; set; }
 

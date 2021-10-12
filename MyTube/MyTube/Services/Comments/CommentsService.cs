@@ -28,5 +28,17 @@
             this.context.Comments.Add(comment);
             this.context.SaveChanges();
         }
+
+        public void CreateReply(CreateReplyInputModel input)
+        {
+            var reply = new Reply
+            {
+                Content = input.Content,
+                CommentId = input.CommentId,
+            };
+
+            this.context.Replies.Add(reply);
+            this.context.SaveChanges();
+        }
     }
 }

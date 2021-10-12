@@ -1,22 +1,22 @@
-﻿namespace MyTube.Models
+﻿namespace MyTube.ViewModels.Comment
 {
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     using static GlobalConstants.GlobalConstants;
 
-    public class Reply
+    public class CreateReplyInputModel
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
+        [DisplayName("Type your reply:")]
         [MinLength(ReplyContentMinLength)]
         [MaxLength(ReplyContentMaxLength)]
         public string Content { get; set; }
 
         [Required]
-        public int CommentId { get; set; }
+        public int VideoId { get; set; }
 
-        public Comment Comment { get; set; }
+        [Required]
+        public int CommentId { get; set; }
     }
 }

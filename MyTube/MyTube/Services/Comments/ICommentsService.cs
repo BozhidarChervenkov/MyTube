@@ -5,5 +5,7 @@
     public interface ICommentsService
     {
         void CreateComment(CreateCommentInputModel input);
+
+        void CreateReply(CreateReplyInputModel input);
     }
 }

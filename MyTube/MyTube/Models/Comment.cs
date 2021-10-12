@@ -13,6 +13,7 @@
             this.Replies = new HashSet<Reply>();
         }
 
+        [Key]
         public int Id { get; set; }
 
         [Required]
