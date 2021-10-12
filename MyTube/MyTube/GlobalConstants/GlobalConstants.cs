@@ -17,5 +17,7 @@
 
         public const int ReplyContentMinLength = 10;
         public const int ReplyContentMaxLength = 50;
+
+        public const string AdministratorRoleName = "Admin12";
     }
 }

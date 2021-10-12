@@ -2,12 +2,14 @@ namespace MyTube
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
 
     using MyTube.Data;
+    using MyTube.Data.Extensions;
     using MyTube.Models;
     using MyTube.Services.Comments;
     using MyTube.Services.Videos;
@@ -37,6 +39,7 @@ namespace MyTube
                     options.Password.RequireLowercase = false;
                     options.Password.RequireNonAlphanumeric = false;
                 })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddControllersWithViews();
@@ -48,6 +51,9 @@ namespace MyTube
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Seed Database
+            app.PrepareDatabase();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
