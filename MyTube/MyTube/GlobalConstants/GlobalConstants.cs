@@ -10,7 +10,7 @@
         public const int MinVideoTitleLength = 10;
         public const int MaxVideoTitleLength = 50;
         public const int MinVideoDescriptionLength = 20;
-        public const int MaxVideoDescriptionLength = 150;
+        public const int MaxVideoDescriptionLength = 500;
 
         public const int CommentContentMinLength = 10;
         public const int CommentContentMaxLength = 70;

@@ -52,6 +52,7 @@
                     VideoImageUrl = v.VideoImageUrl,
                     ViewsCount = v.ViewsCount,
                     LikesCount = v.LikesCount,
+                    DislikesCount = v.DislikesCount,
                     CreatedOn = v.CreatedOn,
                     AccountName = v.ApplicationUser.UserName,
                     AccountPictureUrl = v.ApplicationUser.AccountPictureUrl
@@ -143,6 +144,7 @@
                 Description = video.Description,
                 ViewsCount = video.ViewsCount,
                 LikesCount = video.LikesCount,
+                DislikesCount = video.DislikesCount,
                 CreatedOn = video.CreatedOn,
                 ApplicationUserId = user.Id,
                 UserName = user.UserName,

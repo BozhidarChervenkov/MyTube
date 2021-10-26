@@ -13,6 +13,7 @@ namespace MyTube
     using MyTube.Models;
     using MyTube.Services.Comments;
     using MyTube.Services.Videos;
+    using MyTube.Services.Votes;
 
     public class Startup
     {
@@ -45,6 +46,7 @@ namespace MyTube
             services.AddControllersWithViews();
 
             // Register services:
+            services.AddTransient<IVotesService, VotesService>();
             services.AddTransient<IVideosService, VideosService>();
             services.AddTransient<ICommentsService, CommentsService>();
         }

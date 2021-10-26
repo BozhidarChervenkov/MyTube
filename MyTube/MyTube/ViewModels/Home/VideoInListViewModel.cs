@@ -16,6 +16,8 @@
 
         public int LikesCount { get; set; }
 
+        public int DislikesCount { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public string AccountPictureUrl { get; set; }

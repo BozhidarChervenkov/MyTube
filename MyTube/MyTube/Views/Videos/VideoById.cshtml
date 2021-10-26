@@ -19,8 +19,15 @@
         <div class="row ml-0">
             <img src="@Model.AccountPictureUrl" style="width: 45px; height: 32px;" class="rounded-circle mr-2" /> @Model.UserName
             <p class="offset-6">
-                Like:<i class="far fa-thumbs-up ml-1"> 0</i>
-                Dislike:<i class="far fa-thumbs-down ml-1"> 0</i>
+                @*Voting section*@
+                Like:
+                <a href="#" onclick="sendVote(@Model.Id, true)">
+                    <i class="far fa-thumbs-up ml-1"; id="likesCount">@Model.LikesCount</i>
+                </a>
+                Dislike:
+                <a href="#" onclick="sendVote(@Model.Id, false)">
+                    <i class="far fa-thumbs-down ml-1" ; id="dislikesCount">@Model.DislikesCount</i>
+                </a>
             </p>
         </div>
         <p class="mt-2">@Model.Description</p>
@@ -115,5 +122,20 @@
         $('#save-replyButton').on('click', ev => {
             $('#reply-form').addClass('d-none')
         })
+
+        function sendVote(videoId, isUpVote) {
+            var json = { videoId: videoId, isUpVote: isUpVote };
+            $.ajax({
+                url: "/api/votes",
+                type: "POST",
+                data: JSON.stringify(json),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    $("#likesCount").html(data.likesCount);
+                    $("#dislikesCount").html(data.dislikesCount);
+                }
+            });
+        }
     </script>
 }
