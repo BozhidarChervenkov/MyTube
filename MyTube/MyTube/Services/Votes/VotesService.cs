@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using MyTube.Data;
+    using MyTube.Models;
 
     public class VotesService : IVotesService
     {
@@ -16,19 +17,56 @@
 
         public async Task VoteAsync(int videoId, string userId, bool isUpVote)
         {
-            // Todo: Keep track of who voted using the userId
-
             var video = this.context.Videos.FirstOrDefault(v => v.Id == videoId);
 
-            if (isUpVote == true)
+            // Keeping track voting logic
+            if (this.context.Votes.Any(v => v.VideoId == videoId && v.ApplicationUserId == userId))
             {
-                video.LikesCount++;
+                // Vote exists logic:
+                var vote = this.context.Votes.FirstOrDefault(v => v.VideoId == videoId && v.ApplicationUserId == userId);
+
+                if (vote.IsUpVote == true && isUpVote == true)
+                {
+                    // We don't do anything
+                }
+                else if (vote.IsUpVote == false && isUpVote == false)
+                {
+                    // We don't do anything
+                }
+                else if (vote.IsUpVote == true && isUpVote == false)
+                {
+                    vote.IsUpVote = false;
+                    video.LikesCount--;
+                    video.DislikesCount++;
+                }
+                else if (vote.IsUpVote == false && isUpVote == true)
+                {
+                    vote.IsUpVote = true;
+                    video.LikesCount++;
+                    video.DislikesCount--;
+                }
             }
             else
             {
-                video.DislikesCount++;
-            }
+                // Vote doesn't exist logic:
+                var vote = new Vote
+                {
+                    VideoId = videoId,
+                    ApplicationUserId = userId,
+                    IsUpVote = isUpVote
+                };
 
+                await this.context.Votes.AddAsync(vote);
+
+                if (isUpVote == true)
+                {
+                    video.LikesCount++;
+                }
+                else
+                {
+                    video.DislikesCount++;
+                }
+            }
             await this.context.SaveChangesAsync();
         }
 

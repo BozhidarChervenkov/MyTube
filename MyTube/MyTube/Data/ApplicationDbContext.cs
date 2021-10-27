@@ -14,6 +14,8 @@
 
         public DbSet<Video> Videos { get; set; }
 
+        public DbSet<Vote> Votes { get; set; }
+
         public DbSet<Comment> Comments { get; set; }
 
         public DbSet<Reply> Replies { get; set; }
@@ -33,6 +35,12 @@
             builder.Entity<Comment>()
                 .HasMany(c => c.Replies)
                 .WithOne(r => r.Comment);
+
+            builder.Entity<Vote>()
+                .HasOne(v => v.Video);
+
+            builder.Entity<Vote>()
+                .HasOne(v => v.ApplicationUser);
         }
     }
 }
