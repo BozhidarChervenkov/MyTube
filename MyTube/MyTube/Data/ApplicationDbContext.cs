@@ -20,6 +20,8 @@
 
         public DbSet<Reply> Replies { get; set; }
 
+        public DbSet<PlaylistRecord> PlayListRecords { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

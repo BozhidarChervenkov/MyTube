@@ -9,6 +9,7 @@
         {
             this.Videos = new HashSet<Video>();
             this.Comments = new HashSet<Comment>();
+            this.PlaylistRecords = new HashSet<PlaylistRecord>();
         }
 
         public string AccountPictureUrl { get; set; }
@@ -16,5 +17,7 @@
         public ICollection<Video> Videos { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
+
+        public ICollection<PlaylistRecord> PlaylistRecords { get; set; }
     }
 }

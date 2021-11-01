@@ -4,10 +4,14 @@
     ViewData["Title"] = "Home Page";
 }
 
+Search bar area.....
+
+<hr>
+
 <div class="row justify-content-center">
-    <a asp-controller="Home" asp-action="Index" asp-route-sortTerm = "All" type="button" class="btn btn-success mr-3" style="width: 80px; height: 40px;">All</a>
-    <a asp-controller="Home" asp-action="Index" asp-route-sortTerm = "Latest" type="button" class="btn btn-primary mr-3" style="width: 80px; height: 40px;">Latest</a>
-    <a asp-controller="Home" asp-action="Index" asp-route-sortTerm = "Oldest" type="button" class="btn btn-secondary mr-3" style="width: 80px; height: 40px;">Oldest</a>
+    <a asp-controller="Home" asp-action="Index" asp-route-sortTerm="All" type="button" class="btn btn-success mr-3" style="width: 80px; height: 40px;">All</a>
+    <a asp-controller="Home" asp-action="Index" asp-route-sortTerm="Latest" type="button" class="btn btn-primary mr-3" style="width: 80px; height: 40px;">Latest</a>
+    <a asp-controller="Home" asp-action="Index" asp-route-sortTerm="Oldest" type="button" class="btn btn-secondary mr-3" style="width: 80px; height: 40px;">Oldest</a>
     <a asp-controller="Home" asp-action="Index" asp-route-sortTerm="Most Viewed" type="button" class="btn btn-info mr-3" style="width: 120px; height: 40px;">Most Viewed</a>
     <a asp-controller="Home" asp-action="Index" asp-route-sortTerm="Most Liked" type="button" class="btn btn-danger mr-3" style="width: 120px; height: 40px;">Most Liked</a>
 </div>
@@ -31,11 +35,14 @@
                     <p>@video.ViewsCount views</p>
                 </div>
                 <div class="row justify-content-center">
-                    <p class="card-text text-center">@video.CreatedOn</p>
-                </div>
+                    <p class="card-text text-center">
+                        @video.CreatedOn
+                    <a asp-controller="Playlist" asp-action="Add" asp-route-videoId="@video.Id" class="btn btn-warning btn-sm ml-3"><i class="fas fa-plus"></i></a>
+                </p>
             </div>
         </div>
-    }
+    </div>
+}
 </div>
 
 <hr>

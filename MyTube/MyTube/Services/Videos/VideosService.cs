@@ -73,7 +73,7 @@
                     videos = videos.OrderByDescending(v => v.ViewsCount);
                     break;
                 case "Most Liked":
-                    videos = videos.OrderBy(v => v.LikesCount);
+                    videos = videos.OrderByDescending(v => v.LikesCount);
                     break;
             }
 
