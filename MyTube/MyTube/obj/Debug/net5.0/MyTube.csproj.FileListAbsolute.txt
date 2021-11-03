@@ -444,3 +444,4 @@ D:\Web Projects\MyTube\MyTube\MyTube\MyTube\obj\Debug\net5.0\Razor\Areas\Identit
 D:\Web Projects\MyTube\MyTube\MyTube\MyTube\obj\Debug\net5.0\Razor\Views\Videos\UploadVideo.cshtml.g.cs
 D:\Web Projects\MyTube\MyTube\MyTube\MyTube\obj\Debug\net5.0\Razor\Views\Videos\VideoById.cshtml.g.cs
 D:\Web Projects\MyTube\MyTube\MyTube\MyTube\obj\Debug\net5.0\Razor\Views\Playlist\All.cshtml.g.cs
+D:\Web Projects\MyTube\MyTube\MyTube\MyTube\obj\Debug\net5.0\Razor\Views\Search\Search.cshtml.g.cs

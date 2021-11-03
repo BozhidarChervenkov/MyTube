@@ -9,6 +9,8 @@
             this.Videos = new HashSet<VideoInListViewModel>();
         }
 
+        public string SearchTerm { get; set; }
+
         public ICollection<VideoInListViewModel> Videos { get; set; }
     }
 }

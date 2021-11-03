@@ -49,13 +49,20 @@ using MyTube.ViewModels.Video;
 #nullable disable
 #nullable restore
 #line 6 "D:\Web Projects\MyTube\MyTube\MyTube\MyTube\Views\_ViewImports.cshtml"
+using MyTube.ViewModels.Search;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 7 "D:\Web Projects\MyTube\MyTube\MyTube\MyTube\Views\_ViewImports.cshtml"
 using MyTube.ViewModels.Playlist;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d6a5625cc8fb4476f348b0fe9041c550465d8bf9", @"/Views/Shared/Error.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5b41649f5f595cdb3a6a0f3633c4e87947e38209", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"68e117a7f761ee44d8133a7c3012f0acbbca6602", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared_Error : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<ErrorViewModel>
     {
         #pragma warning disable 1998

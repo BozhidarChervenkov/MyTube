@@ -9,10 +9,11 @@ namespace MyTube
     using Microsoft.Extensions.Hosting;
 
     using MyTube.Data;
-    using MyTube.Data.Extensions;
     using MyTube.Models;
+    using MyTube.Data.Extensions;
     using MyTube.Services.Comments;
     using MyTube.Services.Playlist;
+    using MyTube.Services.Search;
     using MyTube.Services.Videos;
     using MyTube.Services.Votes;
 
@@ -49,6 +50,7 @@ namespace MyTube
             // Register services:
             services.AddTransient<IVotesService, VotesService>();
             services.AddTransient<IVideosService, VideosService>();
+            services.AddTransient<ISearchService, SearchService>();
             services.AddTransient<ICommentsService, CommentsService>();
             services.AddTransient<IPlaylistService, PlaylistService>();
         }

@@ -1,0 +1,44 @@
+﻿@model SearchVideosListViewModel
+
+@{
+    ViewData["Title"] = "Search Results:";
+}
+
+<h2 class="text-center">@this.ViewData["Title"]</h2>
+
+<hr>
+
+@if (this.Model.Videos.Count == 0)
+{
+    <div class="text-center">
+        <img src="~/images/noResultFound.jpg" style="width: 500px; height: 450px;" class="rounded" />
+    </div>
+}
+else
+{
+    <div class="text-center">
+        @foreach (var video in Model.Videos)
+        {
+            <div class="card mb-3 offset-3" style="max-width: 600px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <a asp-controller="Videos" asp-action="VideoById" asp-route-id="@video.Id">
+                            <img src="@video.VideoImageUrl" class="img-fluid rounded-start" style="width:190px; height:125px">
+                        </a>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">@video.Title</h5>
+                            <div class="row justify-content-center">
+                                <img src="@video.ApplicationUser.AccountPictureUrl" style="width: 45px; height: 32px;" class="rounded-circle mr-2" />
+                                <p class="card-text text-center mr-5">@video.ApplicationUser.UserName</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<hr>

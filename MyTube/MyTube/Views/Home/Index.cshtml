@@ -4,7 +4,14 @@
     ViewData["Title"] = "Home Page";
 }
 
-Search bar area.....
+<form method="post" asp-controller="Search" asp-action="Search">
+    <div class="input-group mb-2">
+        <input class="form-control" asp-for="SearchTerm" placeholder="Enter video title or channel name here..." />
+        <div class="group-append">
+            <button type="submit" class="btn btn-success"><i class="fas fa-search"></i> Search</button>
+        </div>
+    </div>
+</form>
 
 <hr>
 
